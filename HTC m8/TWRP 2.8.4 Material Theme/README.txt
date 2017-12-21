@@ -1,0 +1,1 @@
+Place this folder inside the TWRP folder in the root of your SD Card

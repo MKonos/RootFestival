@@ -1,0 +1,119 @@
+<TaskerData sr="" dvi="1" tv="4.7u3m">
+	<Profile sr="prof2" ve="2">
+		<cdate>1441723039025</cdate>
+		<edate>1441930503740</edate>
+		<flags>2</flags>
+		<id>2</id>
+		<mid0>3</mid0>
+		<mid1>4</mid1>
+		<State sr="con0" ve="2">
+			<code>160</code>
+			<Str sr="arg0" ve="3">district207/OCC</Str>
+			<Str sr="arg1" ve="3"/>
+			<Str sr="arg2" ve="3"/>
+		</State>
+	</Profile>
+	<Profile sr="prof5" ve="2">
+		<cdate>1442001922134</cdate>
+		<edate>1442017645501</edate>
+		<id>5</id>
+		<mid0>6</mid0>
+		<mid1>7</mid1>
+		<State sr="con0" ve="2">
+			<code>30</code>
+			<Int sr="arg0" val="0"/>
+		</State>
+	</Profile>
+	<Project sr="proj0" ve="2">
+		<cdate>1441723015208</cdate>
+		<mdate>1442017649698</mdate>
+		<name>Base</name>
+		<pids>2,5</pids>
+		<tids>3,4,6,7,9,10</tids>
+		<Img sr="icon" ve="2">
+			<nme>hl_aaa_ext_home</nme>
+		</Img>
+	</Project>
+	<Task sr="task10">
+		<cdate>1442002226327</cdate>
+		<edate>1442002234191</edate>
+		<id>10</id>
+		<nme>Volume 0</nme>
+		<Action sr="act0" ve="7">
+			<code>307</code>
+			<Int sr="arg0" val="0"/>
+			<Int sr="arg1" val="0"/>
+			<Int sr="arg2" val="0"/>
+		</Action>
+	</Task>
+	<Task sr="task3">
+		<cdate>1441723054208</cdate>
+		<edate>1441723127729</edate>
+		<id>3</id>
+		<nme>Bluetooth Off</nme>
+		<Action sr="act0" ve="7">
+			<code>294</code>
+			<Int sr="arg0" val="0"/>
+		</Action>
+	</Task>
+	<Task sr="task4">
+		<cdate>1441723141946</cdate>
+		<edate>1441723157075</edate>
+		<id>4</id>
+		<nme>Bluetooth On</nme>
+		<Action sr="act0" ve="7">
+			<code>294</code>
+			<Int sr="arg0" val="1"/>
+		</Action>
+	</Task>
+	<Task sr="task6">
+		<cdate>1442001930214</cdate>
+		<edate>1442017645501</edate>
+		<id>6</id>
+		<nme>Launch Music</nme>
+		<Action sr="act0" ve="7">
+			<code>20</code>
+			<App sr="arg0">
+				<appClass>com.maxmpz.audioplayer.StartupActivity</appClass>
+				<appPkg>com.maxmpz.audioplayer</appPkg>
+				<label>Poweramp</label>
+			</App>
+			<Str sr="arg1" ve="3"/>
+			<Int sr="arg2" val="0"/>
+			<Int sr="arg3" val="0"/>
+		</Action>
+		<Action sr="act1" ve="7">
+			<code>307</code>
+			<Int sr="arg0" val="15"/>
+			<Int sr="arg1" val="0"/>
+			<Int sr="arg2" val="0"/>
+		</Action>
+	</Task>
+	<Task sr="task7">
+		<cdate>1442001984504</cdate>
+		<edate>1442002004314</edate>
+		<id>7</id>
+		<nme>Close Music</nme>
+		<Action sr="act0" ve="7">
+			<code>18</code>
+			<App sr="arg0">
+				<appClass>com.maxmpz.audioplayer.StartupActivity</appClass>
+				<appPkg>com.maxmpz.audioplayer</appPkg>
+				<label>Poweramp</label>
+			</App>
+			<Int sr="arg1" val="0"/>
+		</Action>
+	</Task>
+	<Task sr="task9">
+		<cdate>1442002190059</cdate>
+		<edate>1442002212804</edate>
+		<id>9</id>
+		<nme>Volume Max</nme>
+		<Action sr="act0" ve="7">
+			<code>307</code>
+			<Int sr="arg0" val="15"/>
+			<Int sr="arg1" val="0"/>
+			<Int sr="arg2" val="0"/>
+		</Action>
+	</Task>
+</TaskerData>

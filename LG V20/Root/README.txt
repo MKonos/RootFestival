@@ -1,0 +1,1 @@
+if after doing all this stuff and youre getting a twrp bootloop with no boot to OS, factory reset by (pwr, vol down, let go of power and click again during LG logo) and factory reset through twrp as well till it works

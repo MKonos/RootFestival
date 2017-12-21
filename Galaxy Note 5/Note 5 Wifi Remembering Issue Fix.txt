@@ -1,0 +1,6 @@
+WiFi problems?
+Try this:
+Due to "securestorage" being set to true in build.prop, changes to the ROM or kernel that aren't reflected in the ss_id file in /system/etc/secure_storage/.system.bin.wpa_supplicant/ can cause issues with WiFi among other things. You can set this to false yourself, or simply flash the zip file below.
+Download: Set Secure Storage to False
+
+For those that prefer to do it manually, simply change this line ro.securestorage.support=true to false in /system/build.prop.

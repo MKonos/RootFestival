@@ -1,0 +1,44 @@
+How to install Analog Keyboard for Android Wear
+
+1)  Make sure you have a recent Android SDK installed and have a working adb 
+    connection to your watch: http://developer.android.com/tools/help/adb.html
+    
+    For the Moto 360, which doesn't have a USB connector, you need to setup 
+    Bluetooth debugging: https://developer.android.com/training/wearables/apps/bt-debugging.html
+
+-------------
+enable debugging AND bt debugging on the moto 360
+go to the android wear app and enable usb debugging in the settings
+confirm any popups that appear asking for debugging permissions
+adb forward tcp:4444 localabstract:/adb-hub
+adb connect localhost:4444
+-------------
+    
+2)  Run "adb install com.microsoft.research.analogkeyboard-Signed.apk"
+    (don't forget to specify "-s localhost:4444" if you're connected via Bluetooth)
+
+    This will install the keyboard service, as well as a test app that shows up 
+    as "Analog Keyboard" in your watch's "Start..." menu. The test app is 
+    simply a dummy edit control that you can tap to bring up the keyboard.
+
+--------------
+adb -s localhost:4444 install analogkeyboard.apk
+
+adb -s localhost:4444 shell ime enable com.microsoft.research.analogkeyboard/.KeyboardService
+
+adb -s localhost:4444 shell ime set com.microsoft.research.analogkeyboard/.KeyboardService
+--------------
+
+3)  Run "adb -s localhost:4444 shell ime enable com.microsoft.research.analogkeyboard/.KeyboardService"
+
+4)  Run "adb -s localhost:4444 shell ime set com.microsoft.research.analogkeyboard/.KeyboardService"
+
+    This command starts up the service which can make the current foreground app
+    unresponsive for a few (5-10) seconds (this happens only once, though).
+
+5)  Invoke the keyboard by tapping on any text edit control.
+
+Happy handwriting!
+
+For questions, comments, bug reports, please contact analogkeyboard@microsoft.com.
+

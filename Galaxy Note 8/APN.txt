@@ -1,0 +1,16 @@
+Name
+	Server
+APN
+	fast.t-mobile.com
+MMSC
+	http://mms.msg.eng.t-mobile.com/mms/wapenc
+MCC
+	310
+MNC 
+	260
+APN type
+	default,supl,mms,xcap
+APN protocol
+	IPv4
+APN roaming protocol
+	IPv4

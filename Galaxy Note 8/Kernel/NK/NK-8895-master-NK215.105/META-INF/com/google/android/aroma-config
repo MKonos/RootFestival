@@ -1,0 +1,305 @@
+ini_set("force_colorspace", "rgba");
+ini_set("rom_name",     "<#a92914><b>NK-8895-master</b>");
+ini_set("rom_version",          "<#a92914><b>215.105</b>");
+ini_set("rom_author",           "<#a92914><b>FAROVITUS</b>");
+ini_set("rom_device",           "<#a92914><b>SM-G/N95X--F|FD|N</b>");
+ini_set("rom_date",             "<#a92914><b>11 January 2018</b>");
+
+splash(2500, "farovitus");
+
+fontresload( "0", "ttf/Roboto-Regular.ttf", "12" );
+fontresload( "1", "ttf/Roboto-Regular.ttf", "16" );
+
+theme("miui");
+
+###################################################################################################################
+#
+# STEP 1 - SHOW KERNEL INFORMATION
+#
+viewbox(
+  #-- Title
+    "<~Welcome !>",
+
+  #-- Text
+
+    "<~Info>\n\n"+
+
+      "  <~Author>\t           : <b><#selectbg_g>"+ini_get("rom_author")+"</#></b>\n"+
+      "  <~Compability>\t   : <b><#selectbg_g>"+ini_get("rom_device")+"</#></b>\n"+
+      "  <~Kernel>\t           : <b><#selectbg_g>"+ini_get("rom_name")+"</#></b>\n"+
+      "  <~Version>\t           : <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
+      "  <~Updated>\t\t   : <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
+
+    "<~A totally New Experience With Your G/N95X, Enjoy !! -F >",
+
+  #-- Icon
+    "@welcome"
+);
+
+###################################################################################################################
+#
+# STEP 2 - TERMS OF USE AND REQUIREMENTS
+#
+agreebox(
+  #-- Title
+    "Important notes!",
+
+  #-- Subtitle / Description
+    "",
+
+  #-- Icon
+    "@agreement",
+
+  #-- Text Content ( Read from <AROMA Resource Dir>/read_me.txt )
+    resread("gnu.txt"),
+
+  #-- Checkbox Text
+    "I agree with these Terms of Use.",
+
+  #-- Unchecked Alert Message
+    "You need to agree with the Terms of Use..."
+);
+
+if
+  confirm(
+    # Arg 1
+    "Requirements!",
+
+    # Arg 2
+    resread("read_me.txt"),
+
+    # Arg 3
+    "@confirm",
+
+    # Arg 4
+    "Yes",
+
+    # Arg 5
+    "No"
+
+  ) == "no"
+
+then
+  exit();
+endif;
+
+###################################################################################################################
+#
+# STEP 3 - CHANGELOG
+#
+textbox(
+  #-- Title
+    "<~Changelog>",
+
+  #-- Subtitle
+    "<~Read <b>NK-8895's Changelog</b> >",
+
+  #-- Icon
+    "@update",
+
+  #-- Arg 4
+    resread("notochangelog.txt")
+);
+
+###################################################################################################################
+#
+# STEP 4 - SETUP INSTALLATION
+#
+
+########################Wipe method###########################
+  checkbox(
+    # Title
+    "Wipe method",
+
+    # Sub Title
+    "",
+
+    # Icon
+    "@wipe",
+
+    # Will be saved in /tmp/aroma/aroma.prop
+    "aroma.prop",
+
+    #----------[ Checkbox Without Group ]---------------#
+    # TITLE            |  SUBTITLE       | Initial Value #
+    #------------------+-----------------+---------------#
+    #--------[ Initial Value = 0: Unselected, 1: Selected, 2: Group Item, 3: Not Visible ]---------#
+
+    "<#a92914>AROMA</#>",     "",                                                  2, #-- item.1
+    "Start-Fresh",       "Select/Choose to start with new Aroma-Settings",  1, #-- item.1.1
+    "SYSTEM",     "",                                                 3, #-- item.2
+    "system (RW)","mount /system writeble at boot",                   3 #-- item.2.1
+  );
+
+  if prop("aroma.prop","item.1.1")=="0" then
+    #Restore prev installation config
+    resexec("scripts/restore.sh");
+  endif;
+
+
+  #########
+  ## SU
+  #########
+  selectbox(
+    #-- Title
+    "ROOT method",
+
+    #-- Sub Title
+    "Customize how to root your device",
+
+    #-- Icon: <AROMA Resource Dir>/icons/personalize.png or <ThemeDir>/icon.personalize.png
+    "@sim",
+
+    #-- Will be saved in /tmp/aroma/NK_su.prop
+    "NK_su.prop",
+
+    #----------[ Selectbox Without Group ]---------------#
+    # TITLE            |  SUBTITLE       | Initial Value #
+    #------------------+-----------------+---------------#
+    #--------[ Initial Value = 0: Unselected, 1: Selected, 2: Group Item, 3: Not Visible ]---------#
+
+    "No root",                  "NK-8895 without root",        0, #-- selected.0 = 1
+    "Magisk",                   "NK-8895 rooted by Magisk",    1, #-- selected.0 = 2
+    "SuperSU",                  "NK-8895 rooted by SuperSU",   0 #-- selected.0 = 3
+
+  );
+
+  if prop("NK_su.prop","selected.0")=="3" then
+    #########
+    ## SuperSU
+    #########
+
+      selectbox(
+        "SuperSU",
+        "Select installation type. Not all types are supported on all Android versions. System mode requires ROM support on Android >= 6.0.",
+        "",
+        "NK_su_install.prop",
+
+        "Auto-detect",        "Let SuperSU decide",                                                           1,
+        "System",             "Force system installation, default on Android < 6.0",                          0,
+        "Systemless Image",   "Force systemless installation in image mode, default on Android 6.x and 7.x",  0,
+        "Systemless SBIN",    "Force systemless installation in SBIN mode, default on Android >= 8.x",        0
+      );
+
+      # KEEPVERITY, KEEPFORCEENCRYPT, REMOVEENCRYPTABLE
+
+      selectbox(
+        "SuperSU",
+        "Configure encryption options. These apply only to systemless installations.",
+        "",
+        "NK_su_encrypt.prop",
+
+        "dm-verity", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                           1,
+            "Remove",         "Disable dm-verity, default",                                                   0,
+            "Keep",           "Keep dm-verity enabled. Prevents booting with a modified system partition.",   0,
+
+        "force-encrypt", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                           1,
+            "Remove",         "Disable forced encryption of the data partition, default",                     0,
+            "Keep",           "Keep data encryption force enabled",                                           0,
+
+        "encryptable", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                               1,
+            "Remove",         "Disable encryption of the data partition completely, default on Samsung >= 7.0",   0,
+            "Keep",           "Keep optional data encryption enabled, default on all other devices",              0
+      );
+
+      # FRP, BINDSYSTEMXBIN, PERMISSIVE
+
+      selectbox(
+        "SuperSU",
+        "Configure miscellaneous options. These apply only to systemless installations.",
+        "",
+        "NK_su_misc.prop",
+
+        "Factory reset protection", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                                        1,
+            "Enable",         "Allow su binaries (not the GUI) to survive a data wipe. Most devices lack space for this.", 0,
+            "Disable",        "Do not survive a data wipe. Default on most devices.",                                      0,
+
+        "Bind /system/xbin", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                                                               1,
+            "Enable",         "Make the su binaries appear in /system/xbin. Compatibility feature required only for outdated root apps.",    0,
+            "Disable",        "Normal compatibility, default",                                                                                    0,
+
+        "SELinux", "", 2,
+            "Auto-detect",    "Let SuperSU decide",                                                                                   1,
+            "Enforcing",      "Keep SELinux in enforcing mode, patching only the needed rules to allow SuperSU to function, default", 0,
+            "Permissive",     "Set SELinux to permissive mode, disabling its added security",                                         0
+      );
+  else
+    writetmpfile("NK_su_install.prop", "selected.0=1\n");
+  endif;
+
+
+###################################################################################################################
+  #########
+  ## SPECTRUM
+  #########
+
+  selectbox(
+    #-- Title
+    "Spectrum?",
+
+    #-- Sub Title
+    "Install SPECTRUM app so you 4 can choose between 4 pre-configured profiles ?",
+    "@sim",
+    "apps.prop",
+    "NO",                                      "Go with farovitus's personal settings", 1,  #-- selected.0 = 1
+    "YES",                             "I don't care, I Want Spectrum !!", 0 #-- selected.0 = 2
+  );
+###################################################################################################################
+#
+# STEP 6 - INSTALLING
+#
+viewbox(
+  "ready to install NK-8895",
+  "all informations has been collected for installation.\n\n"+
+  "press <b>Next</b> to start the installation..."+
+  "if you want to review or change any of your installation settings, press <b>Back</b>.",
+  "@info"
+);
+
+setvar("retstatus",
+install(
+  "installing NK-8895",
+  "installing <b>" + ini_get("rom_name") + " " + ini_get("rom_version") + "</b>" +
+  "...\nplease wait until it's finished...",
+  "@install")
+);
+
+#Save installation config
+resexec("scripts/save.sh");
+
+#set Next text fo Finish
+ini_set("text_next", "Finish");
+
+if getvar("retstatus")=="0" then
+
+      viewbox(
+              "installation Completed",
+              "<#080>Congratulations...</#>\n\n"+
+        ini_get("rom_name") + " " + ini_get("rom_version") + " has been installed successfully.\n\n"+
+              "tap Finish, and Reboot your device.\n\nThanks.",
+              "@info"
+      );
+else
+      viewbox(
+           "NK-8895's installation failed",
+           "\n\ninstaller status: "+ getvar("retstatus"),
+           "@alert"
+      );
+endif;
+
+if
+  confirm(
+      "Reboot",
+      "Reboot Now?",
+      "icons/info",
+      "Yes",
+      "No"
+  )=="yes"
+then
+  reboot("onfinish");
+endif;

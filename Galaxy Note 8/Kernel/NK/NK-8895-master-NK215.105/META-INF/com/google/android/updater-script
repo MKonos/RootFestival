@@ -1,0 +1,171 @@
+# ===========================================
+# updater-script for Apollo kernel
+# Adapted For NOTORIOUS-Kernel-8895
+# ===========================================
+# Created by lyapota
+# Adapted by farovitus
+# Adapted by ambasdii
+
+set_progress(0.01);
+
+###########################Prepare###############################
+ui_print("@prepare");
+
+ui_print("- mounting partitions...");
+ifelse(is_mounted("/system") == "/system", unmount("/system"));
+ifelse(is_mounted("/cache") == "/cache", unmount("/cache"));
+ifelse(is_mounted("/data") == "/data", unmount("/data"));
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/SYSTEM", "/system");
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/CACHE", "/cache");
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/USERDATA", "/data");
+
+set_progress(0.02);
+
+###########################Prepare###############################
+show_progress(0.08, "-2000");
+
+	ui_print("|-> Installing ....");
+	ui_print("- setup in progress...");
+	delete_recursive("/system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin");
+
+	ui_print("- installing firmware files...");
+	if is_substring("G955", getprop("ro.boot.bootloader")) then
+		package_extract_dir("NK/firmware/G95xF/system", "/system");
+	endif;
+
+	if is_substring("G950", getprop("ro.boot.bootloader")) then
+		package_extract_dir("NK/firmware/G95xF/system", "/system");
+	endif;
+
+	if is_substring("N950", getprop("ro.boot.bootloader")) then
+		package_extract_dir("NK/firmware/N950F/system", "/system");
+	endif;
+
+	ui_print("- removing security log agent...");
+	delete_recursive("/system/app/SecurityLogAgent");
+
+	ui_print("- add fstrim...");
+	package_extract_dir("NK/files/system", "/system");
+
+	ui_print("- set correct permissions...");
+	set_perm_recursive(0, 0, 0755, 0644, "/system/etc");
+	set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
+	set_perm_recursive(0, 0, 0755, 0644, "/system/xbin");
+	set_perm_recursive(0, 0, 0755, 0644, "/system/vendor/firmware");
+	set_perm_recursive(0, 0, 0755, 0644, "/system/vendor/lib");
+	set_perm_recursive(0, 0, 0755, 0644, "/system/vendor/lib64");
+
+    ui_print("|-> clean old su backups and data");
+		if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "1" then
+		run_program("/tmp/clean.sh", "1");
+    endif;
+		if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "2" then
+		run_program("/tmp/clean.sh", "2");
+    endif;
+		if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "3" then
+		run_program("/tmp/clean.sh", "3");
+    endif;
+
+set_progress(0.10);
+show_progress(0.50, "-12000");
+
+# Spectrum
+  if file_getprop("/tmp/aroma/apps.prop", "selected.0") == "2" then
+  ui_print("|-> Spectrum App");
+	delete_recursive("/data/app/org.frap129.spectrum-1");
+	delete_recursive("/data/app/org.frap129.spectrum-2");
+	delete_recursive("/data/data/com.moro.mtweaks-1");
+	delete_recursive("/data/data/com.moro.mtweaks-2");
+	package_extract_dir("apps/org.frap129.spectrum-1", "/data/app/org.frap129.spectrum-1");
+endif;
+
+###########################Unmounting###########################
+unmount("/system");
+unmount("/data");
+unmount("/cache");
+
+set_progress(0.60);
+
+package_extract_dir("NK/noto", "/tmp/noto");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/noto");
+
+if is_substring("G955", getprop("ro.boot.bootloader")) then
+	ui_print("|-> in work SM-G955");
+	run_program("/tmp/noto/busybox", "dd", "if=/tmp/noto/boot.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+endif;
+
+if is_substring("G950", getprop("ro.boot.bootloader")) then
+	ui_print("|-> in work SM-G950");
+	run_program("/tmp/noto/busybox", "dd", "if=/tmp/noto/boot.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+	run_program("/tmp/noto/bspatch", "/tmp/noto/boot.img", "/tmp/noto/boot1.img", "/tmp/noto/boot.img.p");
+	run_program("/tmp/noto/busybox", "dd", "if=/tmp/noto/boot1.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+endif;
+
+if is_substring("N950", getprop("ro.boot.bootloader")) then
+	ui_print("|-> in work SM-N950");
+	run_program("/tmp/noto/busybox", "dd", "if=/tmp/noto/boot.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+	run_program("/tmp/noto/bspatch", "/tmp/noto/boot.img", "/tmp/noto/boot2.img", "/tmp/noto/boot2.img.p");
+	run_program("/tmp/noto/busybox", "dd", "if=/tmp/noto/boot2.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+endif;
+
+delete_recursive("/tmp/noto");
+ui_print("ENJOY !  -FAROVITUS");
+
+
+###########################External###########################
+    if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "1" then
+# No root
+        ui_print("|-> No root");
+    endif;
+
+
+# Busybox
+    if file_getprop("/tmp/aroma/NK_su.prop","selected.0") != "2" then
+    ui_print("|-> Busybox");
+    package_extract_dir("su/busybox", "/tmp/bb");
+    run_program("/sbin/busybox", "unzip", "/tmp/bb/Busybox.v1.27.2.zip", "META-INF/com/google/android/*", "-d", "/tmp/bb");
+    run_program("/sbin/busybox", "sh", "/tmp/bb/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/bb/Busybox.v1.27.2.zip");
+    endif;
+
+    ui_print("|-> mount system");
+    run_program("/sbin/busybox", "mount", "/system");
+
+# Magisk
+    if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "2" then
+        show_progress(0.39, "-12000");
+
+        # Magisk
+        ui_print("|-> Magisk");
+        package_extract_dir("magisk/ma", "/tmp/magisk");
+        run_program("/sbin/busybox", "unzip", "/tmp/magisk/Magisk.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/magisk");
+        run_program("/sbin/busybox", "sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/magisk/Magisk.zip");
+    endif;
+
+# SuperSU
+    if file_getprop("/tmp/aroma/NK_su.prop","selected.0") == "3" then
+        show_progress(0.39, "-32000");
+
+        ui_print("|-> SuperSU");
+        run_program("/tmp/supersu.sh");
+	package_extract_dir("su/SuperSU", "/tmp/su");
+        run_program("/sbin/busybox", "unzip", "/tmp/su/SR5-SuperSU-v2.82-SR5-20171001224502.zip", "META-INF/com/google/android/*", "-d", "/tmp/su");
+        run_program("/sbin/busybox", "sh", "/tmp/su/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/su/SR5-SuperSU-v2.82-SR5-20171001224502.zip");
+
+        if file_getprop("/tmp/aroma/NK_su_install.prop","selected.0") == "4" then
+            ui_print("|-> SuperSU hide");
+            package_extract_dir("su/SU_Hide", "/tmp/suh");
+            run_program("/sbin/busybox", "unzip", "/tmp/suh/UPDATE-suhide-v1.09-20171001222116.zip", "META-INF/com/google/android/*", "-d", "/tmp/suh");
+            run_program("/sbin/busybox", "sh", "/tmp/suh/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/suh/UPDATE-suhide-v1.09-20171001222116.zip");
+        endif;
+
+    endif;
+
+set_progress(0.99);
+
+
+###########################Finish############################
+
+ui_print("");
+ui_print("@installation complete!");
+
+set_progress(1);

@@ -1,0 +1,26 @@
+#!/system/bin/sh
+# Init.d test
+
+if [ -f /system/etc/NOTO_LOGs/INITD_Test.log ] ; then
+    rm /system/etc/NOTO_LOGs/INITD_Test.log
+fi
+
+echo "Init.d is working" >> /system/etc/NOTO_LOGs/INITD_Test.log
+echo "excecuted on $(date +"%d-%m-%Y %r" )" >> /system/etc/NOTO_LOGs/INITD_Test.log
+
+chmod 0755 /system/xbin
+chown 0:0 /system/xbin/*
+chmod 755 /system/xbin/*
+chcon u:object_r:system_file:s0 /system/xbin/*
+
+chmod 0777 /system/etc/init.d
+chown 0:0 /system/etc/init.d/*
+chmod 777 /system/etc/init.d/*
+chcon u:object_r:system_file:s0 /system/etc/init.d/*
+
+chmod 0755 /system/etc/NOTO_LOGs
+chown 0:0 /system/etc/NOTO_LOGs/*
+chmod 600 /system/etc/NOTO_LOGs/*
+chcon u:object_r:system_file:s0 /system/etc/NOTO_LOGs/*
+
+echo "Permissions for log's is setup!" >> /system/etc/NOTO_LOGs/INITD_Test.log

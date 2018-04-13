@@ -1,0 +1,149 @@
+<b><#selectbg_g>NK-8895-master NK215.105</#></b>
+
+<b><#c00>Changes NK214.N104---NK215.105</#></b>
+<#ffffff><*>Implemented Wireguard VPN support usable with Azire VPN  https://forum.xda-developers.com/android/general/guide-how-to-wireguard-android-ubuntu-t3723544</*>
+<*>Add back fake enforce.</*>
+<*>FIXED: Lagginess on N950 devices.</*>
+<*>UPDATED: N950F BQKG Source</*>
+<*>UPDATED: Linux Version: 4.4.109</*>
+<*>UPDATED: Magisk-v15.2</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NK-8895-master NK214.104</#></b>
+
+<b><#c00>Changes NK213/N103---NK214.104</#></b>
+<#ffffff><*>FIXED: Fast Charging (feedbacks needed.)</*>
+<*>Revert back to permissive only patch (based on your feedbacks, i may leave the patch for the next releases or revert back to fake enforce.)</*>
+<*>A Possible fix for kernel installation bug on twrp-3.2+ (feedbacks needed.)</*>
+<*>UPDATED: N950F BQK6 Source & Ramdisk</*>
+<*>UPDATED: N950F BQKG WiFi driver</*>
+<*>UPDATED: Linux Version: 4.4.107</*>
+<*>UPDATED: Magisk-v14.6(1468)</*>
+<*>UPDATED: Increased System Stability, Security & Battery life #3, #1, #3 </#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NK-8895-master NK213.103</#></b>
+
+<b><#c00>Changes NK213/N103---NK213.103</#></b>
+<#ffffff><*>IMPROVEMNTS: Fix micro-lags & increase overall system smoothness</*>
+<*>FIXED: WiFi Calling</*>
+<*>UPDATED: Linux Version: 4.4.102</*>
+<*>UPDATED: Magisk-v14.5(1456)</*>
+<*>UPDATED: F2FS (Not enabled yet !)</*>
+<*>UPDATED: Increased System Stability #2 </#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NK-8895-master NK212.102</#></b>
+
+<b><#c00>Changes NK211/N101---NK212.102</#></b>
+<#ffffff><*>AIO Flashable Zip: One zip for G95X & N950 (*Supported models only)</*>
+<*>REVERT: All GPU modification and use fully stock sammy values (NO OC) </*>
+<*>FIXED: Slow Charging (Need further confirmation from community)</*>
+<*>FIXED: Banking Apps Detecting Root (Need Test) </*>
+<*>UPDATED: Linux Version: 4.4.98</*>
+<*>UPDATED: Ramdisk N950F..AQIA</*>
+<*>UPDATED: Magisk-v14.4(1444)</*>
+<*>UPDATED: Increased M2 default max freq to 2002000 mHz</*>
+<*>UPDATED: Increased System Stability</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK211</#></b>
+
+<b><#c00>Changes NK210---NK211</#></b>
+<#ffffff><*>Updated: Upstream Kernel to 4.4.92</*>
+<*>UPDATED: N950F AQIA Source</*>
+<*>UPDATED: GPU CHANGES Default Max freq is back now to original max freq (546) and capable by user choice to OC up-to (764) (Voltage Control for GPU is broken)</*>
+<*>UPDATED: Magisk-v14.3(1437)(Official Magisk V14.3 that fixes the root loss issues)</*>
+<*>FIXED: Rare random reboots for some users </*>
+<*>Increase overall system smoothness #2 </*>
+<*>Improvements in terms of battery life (SOT) #2 </#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK210</#></b>
+
+<b><#c00>Changes NK209---NK210</#></b>
+<#ffffff><*>Updated: Upstream Kernel to 4.4.91</*>
+<*>Updated: Magisk.V14.3 (No more "root loss" issue)</*>
+<*>Increase overall system smoothness</*>
+<*>Improvements in terms of battery life (SOT)</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK209</#></b>
+
+<b><#c00>Changes NK208---NK209</#></b>
+<#ffffff><*>Updated: Upstream Kernel to 4.4.90</*>
+<*>Updated: Magisk.V14.2</*>
+<*>Updated: SuperSU SR5-SuperSU-v2.82-SR5-20171001224502</*>
+<*>Updated: suhide-v1.09-20171001222116</*>
+<*>Updated: Back to jesec way for fake enforce to eliminate some bugs with supersu users</*>
+<*>FIX: Camera selective focus mode</*>
+<*>FIX: Increased battery consumption while in IDLE</*>
+<*>DISABLED: Custom CPU_BOOST & INPUT_BOOST drivers</*>
+<*>UNDER THE HOOD OPTIMIZATION & fixes</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK208</#></b>
+
+<b><#c00>Changes NK207---NK208</#></b>
+<#ffffff><*>Possible fix for random reboots</*>
+<*>Updated: Latest Linux Patch 4.4.88</*>
+<*>Updated: Default farovitus's settings</*>
+<*>Disabled: INPUT_BOOST</*>
+<*>Added: Boeffla_wakelock_blocker + set default list of wakelock to block natively</*>
+<*>Added: CPU_BOOST</*>
+<*>Revert: CPU OC (M2 = 2.6)</*>
+<*>UNDER THE HOOD OPTIMIZATION & fixes</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK207</#></b>
+
+<b><#c00>Changes NK206---NK207</#></b>
+<#ffffff><*>UNDER THE HOOD OPTIMIZATION & fixes</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK206</#></b>
+
+<b><#c00>Changes NK205---NK206</#></b>
+<#ffffff><*>UNDER THE HOOD OPTIMIZATION</*>
+<*>UPDATED: Choosable! OC CPU (M2) up-to 2652000</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK205</#></b>
+
+<b><#c00>Changes NK204---NK205</#></b>
+<#ffffff><*>UNDER THE HOOD OPTIMIZATION</*>
+<*>FIXED: CPUFREQ Bug</*>
+<*>FIXED: Switching between Enforce & Permissive (A script to load)</*>
+<*>FIXED: End of aroma install goes black</*>
+<*>UPDATED: Super-SU-SR4-SuperSU-v2.82-SR4-20170918204844</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK204</#></b>
+
+<b><#c00>Changes NK203---NK204</#></b>
+<#ffffff><*>UPDATED: Enabling DEX with any HDMI adapter (compability with N8 KERNEL SOURCE)</*>
+<*>FIXED: GPS FOR S8 ROMS & N8 PORTS</#></*>
+
+<#a92914>--------------------------------------------------</#>
+
+<b><#selectbg_g>NOTORIOUS-Kernel-8895-TYPE-H NK203</#></b>
+
+<b><#c00>Changes NK203</#></b>
+<#ffffff><*>UPDATED: Full N950F source AQH9</*>
+<*>UPDATED: Ramdisk: N950F AQI1</*>
+<*>UPDATED: Boot with Permissive mode by default, with ability to switch to Enforce. (Use enforce for increased system security or when you are using an app that requires SELINUX MODE TO BE SET AS "ENFORCING",e.g. some banking apps)</*>
+<*>Added: All features imported from "NOTORIOUS-Kernel-8895-NK202"</*>
+<*>Default linux version from N950 kernel source (4.4.13)</#></*>
+
+<#a92914>--------------------------------------------------</#>

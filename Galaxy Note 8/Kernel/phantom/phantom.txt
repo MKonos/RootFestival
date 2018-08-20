@@ -1,0 +1,13 @@
+
+go to twrp
+wipe caches
+install kernel
+(dont install any root yet)
+then
+boot to rom and wait till all is loaded
+
+reboot to twrp and install root
+
+you should be good to go. thats what i did and im working fine with this kerne
+
+ 

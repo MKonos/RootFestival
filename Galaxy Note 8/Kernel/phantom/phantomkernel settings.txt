@@ -1,0 +1,25 @@
+Settings : 
+1 brightness 25% 
+2 2.3Ghz on big cores zzmoove on big, schedutil on little cores
+3 turned off Samsung "smart" features and hotplugging
+4 freezed half the bloatware in titanium backup.
+5 black theme on everything
+6 turned off edge
+7 used Greenify + NapTime + Myandroid tools + app ops to save battery. 
+8 medium power saving mode
+
+We can estimate from the pictures that I will wnd up with 13~17H SoT
+
+By comparison, Xceed with similar settings burns 8% battery for every hour. Meaning 12 hour SoT
+
+Stock I was burning 13% every hour. Meaning 7.5H
+
+
+spectrum balanced profile, then changed the following:
+
+both CPU governors --> schedutil
+cpu input boost --> OFF (0ms, 0 MHz)
+IO scheduler --> maple, 2048kb readahead on internal, 4096kb on SD
+zSWAP --> 40%
+swappiness --> 40
+ 
